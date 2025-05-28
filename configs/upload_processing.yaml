@@ -1,0 +1,13 @@
+settings:
+  docker:
+    parent_image: 992382797823.dkr.ecr.eu-central-1.amazonaws.com/zenml-rlwlcs:latest
+    skip_build: True
+  orchestrator.sagemaker:
+    synchronous: false
+    
+parameters:
+  user_full_name: "Sistema Upload" # Nome do usuário responsável pelos uploads
+  uploads_folder: "uploads" # Pasta onde os arquivos serão processados
+
+# Exemplo de uso:
+# python tools/run.py --config configs/upload_processing.yaml --pipeline upload_processing

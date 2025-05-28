@@ -13,6 +13,7 @@ from pipelines import (
     feature_engineering,
     generate_datasets,
     training,
+    upload_processing,
 )
 
 
@@ -110,6 +111,18 @@ Examples:
     default=False,
     help="Whether to export your settings to ZenML or not.",
 )
+@click.option(
+    "--run-upload-processing",
+    is_flag=True,
+    default=False,
+    help="Whether to run the upload processing pipeline.",
+)
+@click.option(
+    "--upload-config-filename",
+    type=str,
+    default="upload_processing.yaml",
+    help="Configuration file for upload processing pipeline.",
+)
 def main(
     no_cache: bool = False,
     run_end_to_end_data: bool = False,
@@ -122,6 +135,8 @@ def main(
     run_training: bool = False,
     run_evaluation: bool = False,
     export_settings: bool = False,
+    run_upload_processing: bool = False,
+    upload_config_filename: str = "upload_processing.yaml",
 ) -> None:
     assert (
         run_end_to_end_data
@@ -133,6 +148,7 @@ def main(
         or run_training
         or run_evaluation
         or export_settings
+        or run_upload_processing
     ), "Please specify an action to run."
 
     if export_settings:
@@ -188,12 +204,18 @@ def main(
         pipeline_args["config_path"] = root_dir / "configs" / "training.yaml"
         pipeline_args["run_name"] = f"training_run_{dt.now().strftime('%Y_%m_%d_%H_%M_%S')}"
         training.with_options(**pipeline_args)(**run_args_cd)
-
+    
     if run_evaluation:
         run_args_cd = {}
         pipeline_args["config_path"] = root_dir / "configs" / "evaluating.yaml"
         pipeline_args["run_name"] = f"evaluation_run_{dt.now().strftime('%Y_%m_%d_%H_%M_%S')}"
         evaluating.with_options(**pipeline_args)(**run_args_cd)
+
+    if run_upload_processing:
+        run_args_upload = {}
+        pipeline_args["config_path"] = root_dir / "configs" / upload_config_filename
+        pipeline_args["run_name"] = f"upload_processing_run_{dt.now().strftime('%Y_%m_%d_%H_%M_%S')}"
+        upload_processing.with_options(**pipeline_args)(**run_args_upload)
 
 
 if __name__ == "__main__":

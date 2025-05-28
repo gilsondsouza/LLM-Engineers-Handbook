@@ -8,6 +8,7 @@ from .custom_article import CustomArticleCrawler
 from .github import GithubCrawler
 from .linkedin import LinkedInCrawler
 from .medium import MediumCrawler
+from .file_upload import FileUploadCrawler
 
 
 class CrawlerDispatcher:
@@ -28,10 +29,13 @@ class CrawlerDispatcher:
     def register_linkedin(self) -> "CrawlerDispatcher":
         self.register("https://linkedin.com", LinkedInCrawler)
 
+        return self    def register_github(self) -> "CrawlerDispatcher":
+        self.register("https://github.com", GithubCrawler)
+
         return self
 
-    def register_github(self) -> "CrawlerDispatcher":
-        self.register("https://github.com", GithubCrawler)
+    def register_file_upload(self) -> "CrawlerDispatcher":
+        self.register("file://", FileUploadCrawler)
 
         return self
 

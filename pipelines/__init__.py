@@ -5,6 +5,7 @@ from .export_artifact_to_json import export_artifact_to_json
 from .feature_engineering import feature_engineering
 from .generate_datasets import generate_datasets
 from .training import training
+from .upload_processing import upload_processing_pipeline as upload_processing
 
 __all__ = [
     "generate_datasets",
@@ -14,4 +15,5 @@ __all__ = [
     "digital_data_etl",
     "feature_engineering",
     "training",
+    "upload_processing",
 ]
