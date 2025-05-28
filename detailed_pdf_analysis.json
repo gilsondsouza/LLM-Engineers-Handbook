@@ -1,0 +1,26 @@
+[
+  {
+    "filename": "3009300008806 1.pdf",
+    "filepath": "uploads\\3009300008806 1.pdf",
+    "file_size": 28903660,
+    "page_count": 128,
+    "extraction_time": "2025-05-27T19:04:35.966186",
+    "pages_with_text": 0,
+    "pages_with_images": 10,
+    "found_terms": {},
+    "extraction_method": "text_and_ocr",
+    "sample_content": []
+  },
+  {
+    "filename": "3009300011298 1.pdf",
+    "filepath": "uploads\\3009300011298 1.pdf",
+    "file_size": 17782255,
+    "page_count": 75,
+    "extraction_time": "2025-05-27T19:04:35.985171",
+    "pages_with_text": 0,
+    "pages_with_images": 10,
+    "found_terms": {},
+    "extraction_method": "text_and_ocr",
+    "sample_content": []
+  }
+]
